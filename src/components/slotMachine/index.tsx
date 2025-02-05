@@ -45,14 +45,24 @@ const SlotMachine: React.FC = () => {
 
   return (
     <div>
-      <button
-        className={`-top-1 right-4 absolute flex items-center rounded-md -translate-y-1/2 ${rolling ? 'brightness-75 cursor-not-allowed' : 'hover:brightness-105 hover:cursor-pointer'}`}
-        disabled={rolling}
-        onClick={rollAll}>
-        <img src='/but_3.png' className="w-32" />
-      </button>
-      <div className="scale-110 slot-machine">
-        <div className="space-x-1 rounded-md slots">
+      <div className="-top-1 right-4 absolute flex space-x-2">
+        <button
+          className={`flex items-center rounded-md -translate-y-1/2 ${rolling ? 'brightness-75 cursor-not-allowed' : 'hover:brightness-105 hover:cursor-pointer'}`}
+          disabled={rolling}
+          onClick={rollAll}>
+          <img src='/but_4.png' className="w-48" />
+        </button>
+        <button
+          className={`flex items-center rounded-md -translate-y-1/2 ${rolling ? 'brightness-75 cursor-not-allowed' : 'hover:brightness-105 hover:cursor-pointer'}`}
+          disabled={rolling}
+          onClick={rollAll}>
+          <img src='/but_3.png' className="w-32" />
+        </button>
+      </div>
+      <div className="relative p-1.5 rounded-md scale-115 slot-machine">
+        <img src="/phao_a.png" className="-top-3 -left-10 z-50 absolute w-fit h-full" />
+        <img src="/phao_b.png" className="-top-3 -right-12 z-50 absolute w-fit h-full" />
+        <div className="space-x-2 rounded-md slots">
           {Array.from({ length: 3 }).map((_, i) => (
             <div
               key={i}

@@ -3,20 +3,20 @@ import { CiBoxList } from "react-icons/ci";
 import SlotMachine from "../../components/slotMachine";
 
 interface Player {
-  id: number;
+  rank: number;
   name: string;
   award: number;
 }
 
 const players: Player[] = [
-  { id: 1, name: "Công Hậu", award: 12000 },
-  { id: 2, name: "Hoàng Linh", award: 8000 },
-  { id: 3, name: "Phương Toàn", award: 8000 },
-  { id: 4, name: "Dịu Hiền", award: 6000 },
-  { id: 5, name: "Đức Anh", award: 4000 },
-  { id: 6, name: "Thành Nhân", award: 2000 },
-  { id: 7, name: "Trọng Huy", award: 2000 },
-  { id: 8, name: "Đại Vĩ", award: 0 },
+  { rank: 1, name: "Công Hậu", award: 12000 },
+  { rank: 2, name: "Hoàng Linh", award: 8000 },
+  { rank: 3, name: "Phương Toàn", award: 8000 },
+  { rank: 4, name: "Dịu Hiền", award: 6000 },
+  { rank: 5, name: "Đức Anh", award: 4000 },
+  { rank: 6, name: "Thành Nhân", award: 2000 },
+  { rank: 7, name: "Trọng Huy", award: 2000 },
+  { rank: 8, name: "Đại Vĩ", award: 0 },
 ];
 
 const Home = () => {
@@ -36,14 +36,14 @@ const Home = () => {
             <div className="absolute flex justify-center items-center space-x-10 mt-5 w-full h-full">
               <div className="flex flex-col justify-center items-center">
                 <img src='/dat_tom.png' className="w-full h-38" />
-                {/* <button
+                <button
                   className="relative hover:brightness-105 flex justify-center items-center w-full h-16 hover:cursor-pointer"
                 >
                   <img src='/button_type2.png' className="absolute w-full h-full" />
                   <div className="z-10 flex flex-col justify-center items-center font-bold text-amber-800 capitalize">
                     <p>Dịu Hiền</p>
                   </div>
-                </button> */}
+                </button>
               </div>
               <div className="flex flex-col justify-center">
                 <img src='/dat_bau.png' className="w-full h-38" />
@@ -154,10 +154,16 @@ const Home = () => {
               <table className="border-collapse mt-5 w-full">
                 <tbody>
                   {players.map((player) => (
-                    <tr key={player.id} className={`odd:bg-[#ffdf8d] text-sm font-semibold ${player.id === 1 ? '' : 'border-t'}`}>
-                      <td className="px-2 py-1">{player.id}</td>
-                      <td className="px-2 py-1">{player.name}</td>
-                      <td className="text-right px-2 py-1">{player.award}</td>
+                    <tr key={player.rank} className={`odd:bg-[#ffdf8d] text-sm flex py-1 h-10 w-full justify-between items-center font-semibold ${player.rank === 1 ? '' : 'border-t'}`}>
+                      <td className="flex justify-center items-center px-2 w-[20%]">
+                        {player.rank <= 3 ? (
+                          <img src={`/rank${player.rank}.png`} className="h-10" />
+                        ) : (
+                          <p className="flex justify-center items-center h-full">{player.rank}</p>
+                        )}
+                      </td>
+                      <td className="flex px-2 w-[70%]">{player.name}</td>
+                      <td className="flex justify-end px-2 w-[10%]">{player.award}</td>
                     </tr>
                   ))}
                 </tbody>
