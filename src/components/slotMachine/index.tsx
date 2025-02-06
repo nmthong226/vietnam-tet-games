@@ -44,12 +44,11 @@ const SlotMachine: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="flex justify-between items-center px-4 w-full h-full">
       <div className="-top-1 right-4 absolute flex space-x-2">
         <button
-          className={`flex items-center rounded-md -translate-y-1/2 ${rolling ? 'brightness-75 cursor-not-allowed' : 'hover:brightness-105 hover:cursor-pointer'}`}
-          disabled={rolling}
-          onClick={rollAll}>
+          className={`flex items-center rounded-md -translate-y-1/2 hover:brightness-105 hover:cursor-pointer`}
+        >
           <img src='/but_4.png' className="w-48" />
         </button>
         <button
@@ -58,6 +57,15 @@ const SlotMachine: React.FC = () => {
           onClick={rollAll}>
           <img src='/but_3.png' className="w-32" />
         </button>
+      </div>
+      <div className="relative flex justify-center items-center">
+        <div className="">
+          <img src="/thanhchucnang_phai.png" />
+        </div>
+        <div className="absolute flex flex-col space-y-2">
+          <img src="/chucnang_1.png" className="w-12"/>
+          <img src="/chucnang_1.png" className="w-12"/>
+        </div>
       </div>
       <div className="relative p-1.5 rounded-md scale-115 slot-machine">
         <img src="/phao_a.png" className="-top-3 -left-10 z-50 absolute w-fit h-full" />
@@ -73,6 +81,11 @@ const SlotMachine: React.FC = () => {
           ))}
         </div>
         {/* <div className="">{rolling ? "Chờ Tí..." : indexes.map((i) => iconMap[i]).join(" - ")}</div> */}
+      </div>
+      <div className="flex items-center">
+        <div className="">
+          <img src="/thanhchucnang_phai.png" />
+        </div>
       </div>
     </div>
   );
