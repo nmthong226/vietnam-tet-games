@@ -9,46 +9,46 @@ interface Player {
 }
 
 const players: Player[] = [
-  { rank: 1, name: "Công Hậu", award: 12000 },
-  { rank: 2, name: "Hoàng Linh", award: 8000 },
-  { rank: 3, name: "Phương Toàn", award: 8000 },
-  { rank: 4, name: "Dịu Hiền", award: 6000 },
-  { rank: 5, name: "Đức Anh", award: 4000 },
-  { rank: 6, name: "Thành Nhân", award: 2000 },
-  { rank: 7, name: "Trọng Huy", award: 2000 },
-  { rank: 8, name: "Đại Vĩ", award: 0 },
+  { rank: 1, name: "Người chơi 1", award: 12000 },
+  { rank: 2, name: "Người chơi 2", award: 8000 },
+  { rank: 3, name: "Người chơi 3", award: 8000 },
+  { rank: 4, name: "Người chơi 4", award: 6000 },
+  { rank: 5, name: "Người chơi 5", award: 4000 },
+  { rank: 6, name: "Người chơi 6", award: 2000 },
+  { rank: 7, name: "Người chơi 7", award: 2000 },
+  { rank: 8, name: "Người chơi 8", award: 0 },
 ];
 
 const Home = () => {
   return (
     <div className="flex items-end gap-2 rounded-md w-full h-full">
-      <div className="relative flex flex-col border-10 border-white shadow-xl rounded-md w-[80%] h-[98%]">
-        <div className="-top-1 left-4 absolute flex items-center rounded-md -translate-y-1/2">
+      <div className="relative flex flex-col shadow-xl border-10 border-white rounded-md w-[80%] h-[98%]">
+        <div className="-top-1 left-4 z-50 absolute flex items-center rounded-md -translate-y-1/2">
           <img src='/name_2.png' className="hover:brightness-105 w-68 hover:cursor-pointer" />
         </div>
-        <div className="flex flex-col border-[#703626] border-[2px] bg-[#fff8e2] rounded-md w-full h-full">
+        <div className="flex flex-col bg-[#fff8e2] border-[#703626] border-[2px] rounded-md w-full h-full">
           <div className="relative flex flex-col justify-center items-center h-[60%]">
             <SlotMachine />
           </div>
           <div className="relative flex justify-between items-center p-2 w-full h-[40%]">
-            <img src="/nuatre_trai_2.png" className="w-full h-full" />
-            <img src="/nuatre_2.png" className="w-full h-full" />
+            <img src="/nuatre_trai_2.png" className="left-0 absolute flex pb-2 pl-2 w-1/2 h-full" />
+            <img src="/nuatre_2.png" className="right-0 absolute flex pr-2 pb-2 w-1/2 h-full" />
             <div className="absolute flex justify-center items-center space-x-10 mt-5 w-full h-full">
               <div className="flex flex-col justify-center items-center">
                 <img src='/dat_tom.png' className="w-full h-38" />
                 <button
-                  className="relative hover:brightness-105 flex justify-center items-center w-full h-16 hover:cursor-pointer"
+                  className="relative flex justify-center items-center hover:brightness-105 w-full h-16 hover:cursor-pointer"
                 >
                   <img src='/button_type2.png' className="absolute w-full h-full" />
                   <div className="z-10 flex flex-col justify-center items-center font-bold text-amber-800 capitalize">
-                    <p>Dịu Hiền</p>
+                    <p>{players[0].name}</p>
                   </div>
                 </button>
               </div>
               <div className="flex flex-col justify-center">
                 <img src='/dat_bau.png' className="w-full h-38" />
                 {/* <button
-                  className="relative hover:brightness-105 flex justify-center items-center h-16 hover:cursor-pointer"
+                  className="relative flex justify-center items-center hover:brightness-105 h-16 hover:cursor-pointer"
                 >
                   <img src='/button_type2.png' className="absolute w-full h-full" />
                   <div className="z-10 flex flex-col justify-center items-center font-bold text-amber-800 capitalize">
@@ -59,7 +59,7 @@ const Home = () => {
               <div className="flex flex-col justify-center">
                 <img src='/dat_ga.png' className="w-full h-38" />
                 {/* <button
-                  className="relative hover:brightness-105 flex justify-center items-center h-16 hover:cursor-pointer"
+                  className="relative flex justify-center items-center hover:brightness-105 h-16 hover:cursor-pointer"
                 >
                   <img src='/button_type2.png' className="absolute w-full h-full" />
                   <div className="z-10 flex flex-col justify-center items-center font-bold text-amber-800 capitalize">
@@ -70,7 +70,7 @@ const Home = () => {
               <div className="flex flex-col justify-center items-center">
                 <img src='/dat_ca.png' className="w-full h-38" />
                 {/* <button
-                  className="relative hover:brightness-105 flex justify-center items-center h-16 hover:cursor-pointer"
+                  className="relative flex justify-center items-center hover:brightness-105 h-16 hover:cursor-pointer"
                 >
                   <img src='/button_type2.png' className="absolute w-full h-full" />
                   <div className="z-10 flex flex-col justify-center items-center font-bold text-amber-800 capitalize">
@@ -81,7 +81,7 @@ const Home = () => {
               <div className="flex flex-col justify-center">
                 <img src='/dat_cua.png' className="w-full h-38" />
                 {/* <button
-                  className="relative hover:brightness-105 flex justify-center items-center h-16 hover:cursor-pointer"
+                  className="relative flex justify-center items-center hover:brightness-105 h-16 hover:cursor-pointer"
                 >
                   <img src='/button_type2.png' className="absolute w-full h-full" />
                   <div className="z-10 flex flex-col justify-center items-center font-bold text-amber-800 capitalize">
@@ -92,7 +92,7 @@ const Home = () => {
               <div className="flex flex-col justify-center">
                 <img src='/dat_nai.png' className="w-full h-38" />
                 {/* <button
-                  className="relative hover:brightness-105 flex justify-center items-center h-16 hover:cursor-pointer"
+                  className="relative flex justify-center items-center hover:brightness-105 h-16 hover:cursor-pointer"
                 >
                   <img src='/button_type2.png' className="absolute w-full h-full" />
                   <div className="z-10 flex flex-col justify-center items-center font-bold text-amber-800 capitalize">
@@ -105,21 +105,21 @@ const Home = () => {
         </div>
       </div>
       <div className="flex flex-col justify-end rounded-md w-[20%] h-full">
-        <div className="relative flex border-10 border-white bg-[#fff8e2] shadow-xl rounded-md w-full h-[44%]">
+        <div className="relative flex bg-[#fff8e2] shadow-xl border-10 border-white rounded-md w-full h-[44%]">
           <div className="-top-1 left-1/2 absolute flex items-center rounded-md w-32 h-8 -translate-x-1/2 -translate-y-1/2">
             <img src='/but_1.png' />
           </div>
-          <div className="flex flex-col space-y-4 border-[#703626] border-[2px] bg-[#fff8e2] p-2 rounded-md w-full h-full">
-            <div className="flex bg-[#ffdf8d] mt-5 rounded-xl w-full h-24">
+          <div className="flex flex-col space-y-4 bg-[#fff8e2] p-2 border-[#703626] border-[2px] rounded-md w-full h-full">
+            <div className="flex bg-[#ffdf8d] mt-5 rounded-xl w-full h-[30%]">
               <div className="flex flex-col justify-center items-center space-y-1 w-2/3 h-full">
                 <p className="font-bold text-sm">MÃ PHÒNG</p>
                 <p className="bg-[#ffcb46] px-6 py-1 border rounded-xl font-bold text-2xl">092317</p>
               </div>
-              <div className="flex justify-center items-center w-1/3 h-full">
-                <img src='/sample_qr.png' className="bg-gray-50 rounded-md w-20 h-20" />
+              <div className="flex justify-center items-center p-2 w-1/3 h-full">
+                <img src='/sample_qr.png' className="bg-gray-50 rounded-md w-20 h-full" />
               </div>
             </div>
-            <div className="flex flex-col justify-center space-y-2 bg-[#ffdf8d] p-2 rounded-xl w-full h-40">
+            <div className="flex flex-col justify-center space-y-2 bg-[#ffdf8d] p-2 rounded-xl w-full h-[70%]">
               <div className="flex justify-between items-center pl-4 w-full font-bold">
                 <p className="w-1/3">HOST</p>
                 <p className="flex justify-end items-center bg-[#ffcb46] p-2 border rounded-lg w-2/3 capitalize">
@@ -133,7 +133,7 @@ const Home = () => {
                 </p>
               </div>
               <div className="flex justify-between items-center space-x-3 w-full">
-                <button className="flex justify-center items-center bg-[#ffffb7] border rounded-lg w-1/3 h-8 text-nowrap text-xs">
+                <button className="flex justify-center items-center bg-[#ffffb7] border rounded-lg w-1/3 h-8 text-xs text-nowrap">
                   <RiMoneyEuroBoxLine className="mr-1" />
                   <p className="font-semibold">Tính tiền</p>
                 </button>
@@ -145,13 +145,13 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className="relative flex border-10 border-white bg-[#fff8e2] shadow-xl mt-11 rounded-md w-full h-[48%]">
+        <div className="relative flex bg-[#fff8e2] shadow-xl mt-11 border-10 border-white rounded-md w-full h-[48%]">
           <div className="-top-1 left-1/2 absolute flex items-center rounded-md w-32 h-8 -translate-x-1/2 -translate-y-1/2">
             <img src='/but_2.png' />
           </div>
-          <div className="flex border-[2px] border-[rgb(112,54,38)] bg-[#fff8e2] rounded-md w-full h-full">
+          <div className="flex bg-[#fff8e2] border-[2px] border-[rgb(112,54,38)] rounded-md w-full h-full">
             <div className="grid grid-rows-1 w-full overflow-hidden">
-              <table className="border-collapse mt-5 w-full">
+              <table className="mt-5 w-full border-collapse">
                 <tbody>
                   {players.map((player) => (
                     <tr key={player.rank} className={`odd:bg-[#ffdf8d] text-sm flex py-1 h-10 w-full justify-between items-center font-semibold ${player.rank === 1 ? '' : 'border-t'}`}>
