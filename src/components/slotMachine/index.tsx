@@ -11,7 +11,11 @@ const iconHeight = 79;
 const numIcons = 6;
 const timePerIcon = 100;
 
-const SlotMachine: React.FC = () => {
+interface SlotMachineProps {
+  setOpenModal: () => void;
+}
+
+const SlotMachine: React.FC<SlotMachineProps> = ({ setOpenModal }) => {
   const [indexes, setIndexes] = useState<number[]>([0, 0, 0]);
   const [rolling, setRolling] = useState<boolean>(false);
   const [countdown, setCountdown] = useState<number | null>(null);
@@ -46,6 +50,7 @@ const SlotMachine: React.FC = () => {
         prevIndexes.map((index, i) => (index + deltas[i]) % numIcons)
       );
       setRolling(false);
+      setTimeout(() => setOpenModal(), 1000);
     });
   };
 
@@ -75,10 +80,10 @@ const SlotMachine: React.FC = () => {
     <div className="flex justify-between items-center px-4 w-full h-full">
       <div className="-top-1 right-4 absolute flex space-x-2">
         <button
-          className={`flex relative items-center rounded-md -translate-y-1/2 hover:brightness-105 hover:cursor-pointer`}
+          className={`flex relative items-center rounded-md  -translate-y-1/2 hover:brightness-105 hover:cursor-pointer`}
           onClick={handleOpenRound}
         >
-          <img src='/but_4.png' className="w-48" />
+          <img src='/but_4.png' className="w-42 object-contain" />
           <div className="absolute flex justify-center items-center space-x-1 pb-1 w-full">
             <MdNewReleases className={`size-5 text-[#5a2a2a] ${countdown !== null ? 'hidden' : ''}`} />
             <ImSpinner9 className={`size-4 text-[#5a2a2a] ${countdown !== null ? 'animate-spin' : 'hidden'}`} />
@@ -88,15 +93,15 @@ const SlotMachine: React.FC = () => {
           </div>
         </button>
         <button
-          className={`flex relative items-center rounded-md -translate-y-1/2 z-50 ${rolling || countdown !== null ? 'brightness-75 cursor-not-allowed' : 'hover:brightness-105 hover:cursor-pointer'}`}
+          className={`flex relative items-center rounded-md -translate-y-1/2 z-10 ${rolling || countdown !== null ? 'brightness-75 cursor-not-allowed' : 'hover:brightness-105 hover:cursor-pointer'}`}
           disabled={rolling || countdown !== null}
           onClick={rollAll}>
-          <img src='/but_3.png' className="w-32" />
+          <img src='/but_3.png' className="w-41" />
           <div className="absolute flex justify-center items-center space-x-1 pb-1 w-full">
             <IoDice className={`size-5 text-[#5a2a2a] ${rolling ? 'hidden' : ''}`} />
-            <PiSpinnerBallFill className={`size-5 text-[#5a2a2a] ${rolling ? 'animate-spin' : 'hidden'}`}/>
+            <PiSpinnerBallFill className={`size-5 text-[#5a2a2a] ${rolling ? 'animate-spin' : 'hidden'}`} />
             <p className="font-bold text-[#823d3d] text-[16px] text-center text-nowrap">
-              {rolling ? `Quay...` : "Quay Đê"}
+              {rolling ? `Đang Quay` : "Quay Đê"}
             </p>
           </div>
         </button>

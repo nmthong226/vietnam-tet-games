@@ -1,6 +1,10 @@
 import { RiMoneyEuroBoxLine } from "react-icons/ri";
 import { CiBoxList } from "react-icons/ci";
 import SlotMachine from "../../components/slotMachine";
+import Lottie from 'lottie-react';
+import CongratsAnim from '../../../public/congrats_anim.json';
+import { useState } from "react";
+import WinningBoard from "../../components/winningBoard";
 
 interface Player {
   rank: number;
@@ -20,15 +24,33 @@ const players: Player[] = [
 ];
 
 const Home = () => {
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
   return (
-    <div className="flex items-end gap-2 rounded-md w-full h-full">
+    <div className="flex items-end gap-2 p-3 rounded-md w-full h-full overflow-x-hidden overflow-y-hidden">
+      {modalIsOpen && <Lottie animationData={CongratsAnim} loop={2} className={`bottom-0 left-0 z-[100] absolute`} />}
+      <WinningBoard isOpen={modalIsOpen} />
+      {modalIsOpen &&
+        (
+          <div onClick={closeModal}>
+            <img src='/but_close.png' className="top-0 right-[14%] z-[100] absolute hover:brightness-105 h-28 cursor-pointer" />
+          </div>
+        )
+      }
       <div className="relative flex flex-col shadow-xl border-10 border-white rounded-md w-[80%] h-[98%]">
-        <div className="-top-1 left-4 z-50 absolute flex items-center rounded-md -translate-y-1/2">
+        <div className="-top-1 left-4 z-10 absolute flex items-center rounded-md -translate-y-1/2">
           <img src='/name_2.png' className="hover:brightness-105 w-68 hover:cursor-pointer" />
         </div>
         <div className="flex flex-col bg-[#fff8e2] border-[#703626] border-[2px] rounded-md w-full h-full">
           <div className="relative flex flex-col justify-center items-center h-[60%]">
-            <SlotMachine />
+            <SlotMachine setOpenModal={openModal} />
           </div>
           <div className="relative flex justify-between items-center p-2 w-full h-[40%]">
             <img src="/nuatre_trai_2.png" className="left-0 absolute flex pb-2 pl-2 w-1/2 h-full" />
@@ -40,7 +62,7 @@ const Home = () => {
                   className="relative flex justify-center items-center hover:brightness-105 w-full h-16 hover:cursor-pointer"
                 >
                   <img src='/button_type2.png' className="absolute w-full h-full" />
-                  <div className="z-10 flex flex-col justify-center items-center font-bold text-amber-800 capitalize">
+                  <div className="z-10 flex flex-col justify-center items-center font-bold text-[#703626] capitalize">
                     <p>{players[0].name}</p>
                   </div>
                 </button>
@@ -172,6 +194,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      {modalIsOpen && <Lottie animationData={CongratsAnim} loop={2} className={`right-0 bottom-0 z-[100] absolute -scale-x-100`} />}
     </div>
   )
 }
