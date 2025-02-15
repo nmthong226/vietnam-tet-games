@@ -25,7 +25,7 @@ const players: Player[] = [
 
 const Home = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
-
+  const [result, setResult] = useState<number[]>([0, 0, 0]);
   function openModal() {
     setIsOpen(true);
   }
@@ -35,8 +35,8 @@ const Home = () => {
   }
   return (
     <div className="flex items-end gap-2 p-3 rounded-md w-full h-full overflow-x-hidden overflow-y-hidden">
-      {modalIsOpen && <Lottie animationData={CongratsAnim} loop={2} className={`bottom-0 left-0 z-[100] absolute`} />}
-      <WinningBoard isOpen={modalIsOpen} />
+      {modalIsOpen && <Lottie animationData={CongratsAnim} loop={1} className={`bottom-0 left-0 z-[100] absolute`} />}
+      <WinningBoard isOpen={modalIsOpen} result={result} />
       {modalIsOpen &&
         (
           <div onClick={closeModal}>
@@ -50,7 +50,7 @@ const Home = () => {
         </div>
         <div className="flex flex-col bg-[#fff8e2] border-[#703626] border-[2px] rounded-md w-full h-full">
           <div className="relative flex flex-col justify-center items-center h-[60%]">
-            <SlotMachine setOpenModal={openModal} />
+            <SlotMachine setOpenModal={openModal} setResult={setResult}/>
           </div>
           <div className="relative flex justify-between items-center p-2 w-full h-[40%]">
             <img src="/nuatre_trai_2.png" className="left-0 absolute flex pb-2 pl-2 w-1/2 h-full" />
@@ -194,7 +194,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      {modalIsOpen && <Lottie animationData={CongratsAnim} loop={2} className={`right-0 bottom-0 z-[100] absolute -scale-x-100`} />}
+      {modalIsOpen && <Lottie animationData={CongratsAnim} loop={1} className={`right-0 bottom-0 z-[100] absolute -scale-x-100`} />}
     </div>
   )
 }

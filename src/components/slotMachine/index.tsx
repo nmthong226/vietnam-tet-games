@@ -6,16 +6,16 @@ import { PiSpinnerBallFill } from "react-icons/pi";
 
 import "./style.scss";
 
-// const iconMap = ["Tôm", "Cá", "Cua", "Gà", "Nai", "Bầu"];
 const iconHeight = 79;
 const numIcons = 6;
 const timePerIcon = 100;
 
 interface SlotMachineProps {
   setOpenModal: () => void;
+  setResult: (results: number[]) => void;
 }
 
-const SlotMachine: React.FC<SlotMachineProps> = ({ setOpenModal }) => {
+const SlotMachine: React.FC<SlotMachineProps> = ({ setOpenModal, setResult }) => {
   const [indexes, setIndexes] = useState<number[]>([0, 0, 0]);
   const [rolling, setRolling] = useState<boolean>(false);
   const [countdown, setCountdown] = useState<number | null>(null);
@@ -53,6 +53,10 @@ const SlotMachine: React.FC<SlotMachineProps> = ({ setOpenModal }) => {
       setTimeout(() => setOpenModal(), 1000);
     });
   };
+
+  useEffect(() => {
+    setResult(indexes);
+  }, [indexes]);
 
   useEffect(() => {
     let timer = 0;
@@ -153,7 +157,6 @@ const SlotMachine: React.FC<SlotMachineProps> = ({ setOpenModal }) => {
             />
           ))}
         </div>
-        {/* <div className="">{rolling ? "Chờ Tí..." : indexes.map((i) => iconMap[i]).join(" - ")}</div> */}
       </div>
       <div className="relative flex justify-center items-center">
         <div className="">
