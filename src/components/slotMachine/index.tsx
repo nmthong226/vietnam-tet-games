@@ -5,6 +5,7 @@ import { ImSpinner9 } from "react-icons/im";
 import { PiSpinnerBallFill } from "react-icons/pi";
 
 import "./style.scss";
+import { Link } from "react-router-dom";
 
 const iconHeight = 79;
 const numIcons = 6;
@@ -115,7 +116,7 @@ const SlotMachine: React.FC<SlotMachineProps> = ({ setOpenModal, setResult }) =>
           <img src="/thanhchucnang_2.png" />
         </div>
         <div className="absolute flex flex-col items-center space-y-3">
-          <div className="group relative">
+          <Link to='/' className="group relative">
             <img src="/chucnang_2.png" className="w-10 hover:scale-110 duration-200 ease-in-out hover:cursor-pointer transform" />
             <div className="group-hover:visible invisible top-2 left-14 absolute flex items-center font-semibold text-white text-center text-nowrap">
               <hr className="border-t-2 border-red-800 w-4" />
@@ -123,7 +124,7 @@ const SlotMachine: React.FC<SlotMachineProps> = ({ setOpenModal, setResult }) =>
                 <p>🏵️ Trang Chủ</p>
               </div>
             </div>
-          </div>
+          </Link>
           <div className="group relative">
             <img src="/chucnang_1.png" className="w-12 hover:scale-110 duration-200 ease-in-out hover:cursor-pointer transform" />
             <div className="group-hover:visible invisible top-2 left-15 absolute flex items-center font-semibold text-white text-center text-nowrap">

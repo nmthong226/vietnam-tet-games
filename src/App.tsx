@@ -4,6 +4,7 @@ import { Layout } from './layouts';
 import Home from './pages/home';
 import React from 'react';
 import Modal from 'react-modal';
+import BauCua from './pages/baucua/gameplay';
 
 Modal.setAppElement('#root');
 
@@ -13,6 +14,7 @@ const App: React.FC = () => {
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/baucua" element={<BauCua />} />
         </Routes>
       </Layout>
     </Router>
