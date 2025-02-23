@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 interface WinningBoardProps {
     isOpen: boolean;
     result: number[];
+    playerList: Player[];
 }
 
 // Define the type for resultData
@@ -13,32 +14,32 @@ interface ResultItem {
 
 const resultData = [
     {
-        name: "Tôm",
+        name: "tôm",
         image: "/dat_tom.png"
     },
     {
-        name: "Cá",
+        name: "cá",
         image: "/dat_ca.png"
     },
     {
-        name: "Cua",
+        name: "cua",
         image: "/dat_cua.png"
     },
     {
-        name: "Gà",
+        name: "gà",
         image: "/dat_ga.png"
     },
     {
-        name: "Nai",
+        name: "nai",
         image: "/dat_nai.png"
     },
     {
-        name: "Bầu",
+        name: "bầu",
         image: "/dat_bau.png"
     },
 ]
 
-const WinningBoard: React.FC<WinningBoardProps> = ({ isOpen, result }) => {
+const WinningBoard: React.FC<WinningBoardProps> = ({ isOpen, result, playerList }) => {
     // Group results by image
     const groupedResults = Object.values(
         result.reduce((acc, index) => {
@@ -59,24 +60,39 @@ const WinningBoard: React.FC<WinningBoardProps> = ({ isOpen, result }) => {
                         <img key={index} src={item.image} className="w-40 h-40" alt={item.name} />
                     ))}
                 </div>
-                <p className="font-semibold text-2xl">{group[0].name} {group.length > 1 ? `X${group.length}` : ''} </p>
+                <p className="font-semibold text-2xl capitalize">{group[0].name} {group.length > 1 ? `X${group.length}` : ''} </p>
             </div>
         ));
 
-    const winners = [
-        { name: "Nguyễn Văn A", prize: "4000", total: "4000" },
-        { name: "Nguyễn Văn A", prize: "4000", total: "4000" },
-        { name: "Nguyễn Văn A", prize: "4000", total: "4000" },
-        { name: "Nguyễn Văn A", prize: "4000", total: "4000" },
-        { name: "Nguyễn Văn A", prize: "4000", total: "4000" },
-        { name: "Nguyễn Văn A", prize: "4000", total: "4000" },
-        { name: "Nguyễn Văn A", prize: "4000", total: "4000" },
-    ];
+    const getWinningPlayers = (players: Player[], result: number[]): { name: string; bets: string; balance: number }[] => {
+        return players
+            .map(player => {
+                // Find the winning bets for this player
+                const winningBets = player.bets.filter(bet =>
+                    result.some(index => bet.symbol === resultData[index].name)
+                );
+
+                if (winningBets.length === 0) return null; // Skip players with no winning bets
+
+                // Calculate total winnings (assuming a 1:1 payout)
+                const totalWinnings = winningBets.reduce((sum, bet) => sum + bet.amount, 0);
+                const updatedBalance = player.balance + totalWinnings;
+
+                return {
+                    name: player.name,
+                    bets: winningBets.map(bet => `${bet.symbol} (${bet.amount})`).join(', '),
+                    balance: updatedBalance
+                };
+            })
+            .filter((player): player is { name: string; bets: string; balance: number } => player !== null); // Ensure correct type
+    };
+
+    const winningPlayers = getWinningPlayers(playerList ?? [], result);
 
     return (
         <AnimatePresence>
             {isOpen && (
-                <div className="z-50 fixed inset-0 flex justify-center items-center bg-black/50">
+                <div className="z-50 fixed inset-0 flex justify-center items-center bg-black/80">
                     <motion.div
                         variants={{
                             hidden: { y: "100vh", opacity: 0 },
@@ -109,10 +125,11 @@ const WinningBoard: React.FC<WinningBoardProps> = ({ isOpen, result }) => {
                         </div>
                         <div
                             className="flex flex-col items-center bg-amber-100 my-10 p-6 rounded-xl h-[320px]"
-                            style={{ backgroundImage: "url('/winning.png')",
+                            style={{
+                                backgroundImage: "url('/winning.png')",
                                 backgroundPosition: "center",
                                 backgroundRepeat: "no-repeat",
-                             }}
+                            }}
                         >
                             <p className="bg-gradient-to-r from-amber-300/40 to-amber-400/60 mb-4 p-1.5 px-8 rounded-xl font-semibold text-amber-700 text-xl">Danh sách người chơi đã trúng</p>
                             <div className="flex flex-col justify-center items-center w-full">
@@ -128,21 +145,27 @@ const WinningBoard: React.FC<WinningBoardProps> = ({ isOpen, result }) => {
                                     </p>
                                 </div>
                                 <div className="flex flex-col items-center space-y-1 w-full h-[180px] overflow-y-auto">
-                                    {winners.map((winner, index) =>
+                                    {winningPlayers.map((winner, index) => (
                                         <div
                                             key={index}
-                                            className="flex items-center bg-white py-2 rounded-lg w-full max-w-2xl h-fit">
+                                            className="flex items-center bg-white shadow-md py-2 rounded-lg w-full max-w-2xl h-fit"
+                                        >
+                                            {/* Player Name */}
                                             <p className="flex px-2 w-[33.3%] font-semibold">
                                                 {winner.name}
                                             </p>
-                                            <p className="flex justify-center w-[33.3%] font-semibold">
-                                                {winner.prize}
+
+                                            {/* Winning Bets */}
+                                            <p className="flex justify-center w-[33.3%] font-semibold capitalize">
+                                                {winner.bets}
                                             </p>
+
+                                            {/* Updated Balance */}
                                             <p className="flex justify-end px-2 w-[33.3%] font-semibold">
-                                                {winner.total}
+                                                {winner.balance}
                                             </p>
                                         </div>
-                                    )}
+                                    ))}
                                 </div>
                             </div>
                         </div>
