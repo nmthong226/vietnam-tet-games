@@ -33,3 +33,15 @@ interface DiceRollProps {
     diceResult: Bet[];
     isRolling: boolean;
 }
+
+export type GameSymbol = 'deer' | 'gourd' | 'rooster' | 'fish' | 'crab' | 'shrimp';
+
+export interface Room {
+    id: string;
+    hostId: string;
+    passkey: string;
+    players: Player[];
+    status: 'waiting' | 'betting' | 'spinning' | 'results';
+    currentRound: number;
+    winningSymbols?: GameSymbol[];
+}

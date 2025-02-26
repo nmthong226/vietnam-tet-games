@@ -1,4 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
+import { FcCancel } from "react-icons/fc";
+import { Player } from "../../types/types";
 
 interface WinningBoardProps {
     isOpen: boolean;
@@ -60,7 +62,11 @@ const WinningBoard: React.FC<WinningBoardProps> = ({ isOpen, result, playerList 
                         <img key={index} src={item.image} className="w-40 h-40" alt={item.name} />
                     ))}
                 </div>
-                <p className="font-semibold text-2xl capitalize">{group[0].name} {group.length > 1 ? `X${group.length}` : ''} </p>
+                {group.length > 1 ? (
+                    <p className="bg-clip-text bg-gradient-to-r from-[#FF0000] via-[#FF8000] to-[#FF0000] font-bold text-transparent text-2xl capitalize">{group[0].name} {`X${group.length}`} </p>
+                ) : (
+                    <p className="font-semibold text-2xl capitalize">{group[0].name}</p>
+                )}
             </div>
         ));
 
@@ -92,7 +98,12 @@ const WinningBoard: React.FC<WinningBoardProps> = ({ isOpen, result, playerList 
     return (
         <AnimatePresence>
             {isOpen && (
-                <div className="z-50 fixed inset-0 flex justify-center items-center bg-black/80">
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="z-50 fixed inset-0 flex justify-center items-center bg-black/80">
                     <motion.div
                         variants={{
                             hidden: { y: "100vh", opacity: 0 },
@@ -145,7 +156,7 @@ const WinningBoard: React.FC<WinningBoardProps> = ({ isOpen, result, playerList 
                                     </p>
                                 </div>
                                 <div className="flex flex-col items-center space-y-1 w-full h-[180px] overflow-y-auto">
-                                    {winningPlayers.map((winner, index) => (
+                                    {winningPlayers.length > 0 ? winningPlayers.map((winner, index) => (
                                         <div
                                             key={index}
                                             className="flex items-center bg-white shadow-md py-2 rounded-lg w-full max-w-2xl h-fit"
@@ -165,12 +176,17 @@ const WinningBoard: React.FC<WinningBoardProps> = ({ isOpen, result, playerList 
                                                 {winner.balance}
                                             </p>
                                         </div>
-                                    ))}
+                                    )) : (
+                                        <div className="flex justify-center items-center bg-white shadow-md py-2 rounded-lg w-full max-w-2xl h-fit text-gray-600">
+                                            <FcCancel className="mr-1 size-5" />
+                                            <p>Không có người chơi thắng</p>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>
                     </motion.div>
-                </div>
+                </motion.div>
             )}
         </AnimatePresence>
     );

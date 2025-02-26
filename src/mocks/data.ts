@@ -9,10 +9,6 @@ export const players: Player[] = [
                 symbol: "tôm",
                 amount: 100
             },
-            {
-                symbol: "nai",
-                amount: 200
-            }
         ],        
     },
     {
@@ -25,10 +21,6 @@ export const players: Player[] = [
                 symbol: "tôm",
                 amount: 100
             },
-            {
-                symbol: "nai",
-                amount: 200
-            }
         ],        
     },
     {
@@ -41,14 +33,7 @@ export const players: Player[] = [
                 symbol: "bầu",
                 amount: 300
             },
-            {
-                symbol: "nai",
-                amount: 200
-            },
-            {
-                symbol: "gà",
-                amount: 100
-            }
+            
         ],        
     },
     {
@@ -61,14 +46,6 @@ export const players: Player[] = [
                 symbol: "tôm",
                 amount: 100
             },
-            {
-                symbol: "nai",
-                amount: 200
-            },
-            {
-                symbol: "gà",
-                amount: 100
-            }
         ],        
     },
 ]
