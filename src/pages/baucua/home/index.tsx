@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Dice6, Users } from 'lucide-react';
 
-export default function HomeBauCua() {
+export default function BauCuaHome() {
     const navigate = useNavigate();
 
     return (
@@ -19,9 +19,8 @@ export default function HomeBauCua() {
                         <Users size={24} />
                         Host a Game
                     </button>
-
                     <button
-                        onClick={() => navigate('/play/join')}
+                        onClick={() => navigate('/baucua/join')}
                         className="flex justify-center items-center gap-3 bg-gray-800 hover:bg-gray-900 px-6 py-4 rounded-lg w-full text-white transition-colors"
                     >
                         <Dice6 size={24} />

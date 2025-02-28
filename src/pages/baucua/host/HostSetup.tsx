@@ -1,38 +1,42 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
 import { Copy, Crown, Users } from 'lucide-react';
 import { supabase } from '../../../lib/supabase';
 import { useGameStore } from '../../../store/gameStore';
 import type { Player } from '../../../types/types';
 
-export default function HostRoom() {
+export default function HostSetup() {
   const [roomCode, setRoomCode] = useState('');
   const [players, setPlayers] = useState<Player[]>([]);
   const [copied, setCopied] = useState(false);
   const { setIsHost } = useGameStore();
+  const hasCreatedRoom = useRef(false);
 
   useEffect(() => {
-    setIsHost(true);
-    createRoom();
-
+    if (!hasCreatedRoom.current) {
+      setIsHost(true);
+      createRoom();
+      hasCreatedRoom.current = true;
+    }
     return () => setIsHost(false);
   }, [setIsHost]);
 
   const createRoom = async () => {
     try {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-
-      if (!user) return;
+      // const {
+      //   data: { user },
+      // } = await supabase.auth.getUser();
+      
+      // if (!user) return;
+      if (roomCode) return;
 
       const passkey = Math.random().toString(36).substring(2, 8).toUpperCase();
-
+      
       const { data: room, error } = await supabase
         .from('rooms')
         .insert([
           {
-            host_id: user.id,
+            host_id: '747340c4-54d7-43be-aa25-629c1dbd2f91',
             passkey,
             status: 'waiting',
           },
@@ -62,7 +66,7 @@ export default function HostRoom() {
               .from('players')
               .select('*')
               .eq('room_id', room.id)
-              .then(({ data }: { data: Player[] }) => {
+              .then(({ data }) => {
                 if (data) setPlayers(data as Player[]);
               });
           }
@@ -83,10 +87,10 @@ export default function HostRoom() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const joinUrl = `${window.location.origin}/play/${roomCode}`;
+  const joinUrl = `${window.location.origin}/join/${roomCode}`;
 
   return (
-    <div className="p-6 min-h-screen">
+    <div className="flex justify-center items-center bg-gradient-to-br from-[#FFD6AC] to-[#ffc082] p-4 w-full h-full">
       <div className="gap-8 grid grid-cols-1 md:grid-cols-2 mx-auto max-w-4xl">
         {/* Room Info */}
         <div className="bg-white shadow-xl p-8 rounded-xl">

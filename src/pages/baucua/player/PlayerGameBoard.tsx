@@ -1,4 +1,3 @@
-import SlotMachine from "../../../components/slotMachine/host";
 import Lottie from 'lottie-react';
 import CongratsAnim from '../../../../public/congrats_anim.json';
 import { useEffect, useState } from "react";
@@ -6,6 +5,8 @@ import WinningBoard from "../../../components/winningBoard";
 import PlayerBet from "../../../components/playerBet";
 import { players as mockPlayers } from "../../../mocks/data";
 import { cn } from "../../../lib/utils";
+import PlayerSlotMachine from "../../../components/slotMachine/player";
+import { IoMdExit } from "react-icons/io";
 import { Player } from "../../../types/types";
 
 export function rankPlayers(players: Player[]): Player[] {
@@ -17,7 +18,7 @@ export function rankPlayers(players: Player[]): Player[] {
   });
 }
 
-const HostBauCua = () => {
+const PlayerGameBoard = () => {
   const [winningModalIsOpen, setWinningModalIsOpen] = useState(false);
   const [playerBetModalIsOpen, setPlayerBetModalIsOpen] = useState(false);
   const [result, setResult] = useState<number[]>([0, 0, 0]);
@@ -90,7 +91,7 @@ const HostBauCua = () => {
         </div>
         <div className="flex flex-col bg-[#fff8e2] border-[#703626] border-[2px] rounded-md w-full h-full">
           <div className="relative flex flex-col justify-center items-center h-[60%]">
-            <SlotMachine setOpenModal={() => openModal('winning')} setResult={setResult} />
+            <PlayerSlotMachine setOpenModal={() => openModal('winning')} setResult={setResult} />
           </div>
           <div className="relative flex justify-between items-center p-2 w-full h-[40%]">
             <img src="/nuatre_trai_2.png" className="left-0 absolute flex pb-2 pl-2 w-1/2 h-full" />
@@ -140,15 +141,15 @@ const HostBauCua = () => {
               </div>
             </div>
             <div className="flex flex-col justify-center space-y-2 bg-[#ffdf8d] p-2 rounded-xl w-full h-[70%]">
-              <div className="flex justify-between items-center pl-4 w-full font-bold">
-                <p className="w-1/3">HOST</p>
-                <p className="flex justify-end items-center bg-[#ffcb46] p-2 border rounded-lg w-2/3 capitalize">
+              <div className="flex justify-between items-center pl-1 w-full font-semibold">
+                <p className="w-[37%]">Ng.Chơi</p>
+                <p className="flex justify-end items-center bg-[#ffcb46] p-2 border rounded-lg w-[63%] capitalize">
                   Minh Thông
                 </p>
               </div>
-              <div className="flex justify-between items-center pl-4 w-full font-bold">
-                <p className="w-1/3">$$$</p>
-                <p className="flex justify-end items-center bg-[#ffcb46] p-2 border rounded-lg w-2/3 capitalize">
+              <div className="flex justify-between items-center pl-1 w-full font-semibold">
+                <p className="w-[37%]">Quỹ</p>
+                <p className="flex justify-end items-center bg-[#ffcb46] p-2 border rounded-lg w-[63%] capitalize">
                   20000
                 </p>
               </div>
@@ -158,8 +159,8 @@ const HostBauCua = () => {
                   <p className="font-semibold">Tính tiền</p>
                 </button>
                 <button className="flex justify-center items-center bg-gradient-to-b from-[#ffffe5] via-[#ffffb7] to-[#ffe3b7] shadow-md hover:brightness-105 border border-amber-900 rounded-lg w-[63%] h-8 text-xs hover:cursor-pointer">
-                  <p className="mr-1 text-base">📋</p>
-                  <p className="font-semibold">Người chơi</p>
+                  <IoMdExit className="mr-1 size-5 text-amber-600"/>
+                  <p className="font-semibold">Rời phòng</p>
                 </button>
               </div>
             </div>
@@ -197,4 +198,4 @@ const HostBauCua = () => {
   )
 }
 
-export default HostBauCua
+export default PlayerGameBoard

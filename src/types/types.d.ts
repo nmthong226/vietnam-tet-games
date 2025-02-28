@@ -7,7 +7,9 @@ interface Bet {
 // Represents a player in the game
 interface Player {
     id: string;
+    room_id: string;
     timeEnter: Date;
+    status: string;
     name: string;
     balance: number;
     bets: Bet[]; // List of bets placed in the current round
@@ -34,7 +36,7 @@ interface DiceRollProps {
     isRolling: boolean;
 }
 
-export type GameSymbol = 'deer' | 'gourd' | 'rooster' | 'fish' | 'crab' | 'shrimp';
+export type GameSymbol = 'tôm' | 'cá' | 'cua' | 'gà' | 'nai' | 'bầu';
 
 export interface Room {
     id: string;

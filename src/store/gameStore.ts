@@ -21,7 +21,6 @@ export const useGameStore = create<GameState>((set) => ({
     placeBet: (symbol, amount) =>
         set((state) => {
             if (!state.currentPlayer) return state;
-
             const updatedBets = [...(state.currentPlayer.bets || [])];
             const existingBetIndex = updatedBets.findIndex((bet) => bet.symbol === symbol);
 

@@ -38,7 +38,6 @@ export interface Database {
             players: {
                 Row: {
                     id: string
-                    room_id: string
                     user_id: string
                     name: string
                     balance: number
@@ -46,7 +45,6 @@ export interface Database {
                 }
                 Insert: {
                     id?: string
-                    room_id: string
                     user_id: string
                     name: string
                     balance?: number
@@ -54,7 +52,6 @@ export interface Database {
                 }
                 Update: {
                     id?: string
-                    room_id?: string
                     user_id?: string
                     name?: string
                     balance?: number
